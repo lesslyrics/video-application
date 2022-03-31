@@ -1,5 +1,12 @@
 # Video uploads to AWS S3 with feature extraction and classification
 
+## Install
+```
+RUN npm install
+RUN cd client
+RUN npm install
+RUN cd ..
+```
 ## Run
 ```
 npm start dev # to run server
