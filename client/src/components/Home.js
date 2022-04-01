@@ -49,7 +49,7 @@ class Home extends Component {
 							this.ocShowAlert( 'File Uploaded', '#3089cf' );
 
 							// axios.get( '/api/profile/execfeatures')
-							axios.post('https://httpbin.org/post', { file: this.state.selectedFile.name }, {
+							axios.post('http://ec2-18-212-176-244.compute-1.amazonaws.com:2000/extract', { file: this.state.selectedFile.name }, {
 								headers: {
 									'accept': 'application/json',
 									'Accept-Language': 'en-US,en;q=0.8',
