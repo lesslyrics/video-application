@@ -48,8 +48,23 @@ class Home extends Component {
 							console.log( 'filedata', fileName );
 							this.ocShowAlert( 'File Uploaded', '#3089cf' );
 
-							axios.get( '/api/profile/execfeatures')
-							// axios.get('api/profile/execnet')
+							// axios.get( '/api/profile/execfeatures')
+							axios.post( 'http://ec2-18-206-56-103.compute-1.amazonaws.com:2000/extract', data, {
+								headers: {
+									'accept': 'application/json',
+									'Accept-Language': 'en-US,en;q=0.8',
+									'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
+								}
+							}).then( ( response ) => {
+								if ( 200 === response.status ) {
+									console.log('Feature extraction successful')
+									this.ocShowResult(response.data)
+								} else {
+									console.log( 'Error when trying to extract features from ', fileName );
+								}
+							}).catch( ( error ) => {
+								this.ocShowAlert( error, 'red' );
+							});
 						}
 					}
 				}).catch( ( error ) => {
@@ -142,9 +157,9 @@ class Home extends Component {
 						<div className="mt-5">
 							<button className="btn btn-info" onClick={this.videoUploadHandler}>Upload!</button>
 						</div>
-						<div className="mt-5">
-							<button className="btn btn-info" onClick={this.resultObtainedHandler}>Get Result</button>
-						</div>
+						{/*<div className="mt-5">*/}
+						{/*	<button className="btn btn-info" onClick={this.resultObtainedHandler}>Get Result</button>*/}
+						{/*</div>*/}
 						<div  style={{ color: '#555', background: '#ffffff' }} ><h3 id="test"></h3></div>
 					</div>
 				</div>

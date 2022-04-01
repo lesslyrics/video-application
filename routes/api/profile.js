@@ -31,53 +31,41 @@ const videoUpload = multer({
 	limits:{ fileSize: 2000000 }, // In bytes: 2000000 bytes = 2 MB
 }).single('video');
 
-var tmp = ""
+// var tmp = ""
 
-/**
- * @route POST /api/profile/notify
- * @desc Notify about CNN results
- * @access public
- */
-router.post( '/notify', ( req, res ) => {
-	tmp = req.body.name
-	console.log('filename is ',tmp);
-	res.send(req.body);
+// /**
+//  * @route POST /api/profile/notify
+//  * @desc Notify about CNN results
+//  * @access public
+//  */
+// router.post( '/notify', ( req, res ) => {
+// 	tmp = req.body.name
+// 	console.log('filename is ',tmp);
+// 	res.send(req.body);
+//
+// })
 
-})
-
-function exec(cmd, handler = function(error, stdout, stderr){console.log(stdout);if(error !== null){console.log(stderr)}})
-{
-	const childfork = require('child_process');
-	return childfork.exec(cmd, handler);
-}
-
-
-/**
- * @route GET /api/profile/execdocker
- * @access public
- */
-router.get( '/execfeatures', ( req, res ) => {
-	exec('docker run aboshchenko/features-extraction:latest');
-	res.json({ result: 'ready' });
-})
+// function exec(cmd, handler = function(error, stdout, stderr){console.log(stdout);if(error !== null){console.log(stderr)}})
+// {
+// 	const childfork = require('child_process');
+// 	return childfork.exec(cmd, handler);
+// }
 
 
-/**
- * @route GET /api/profile/notify
- * @access public
- */
-router.get( '/execnet', ( req, res ) => {
-	exec('curl https://testbucket-1h.s3.amazonaws.com/features.npy --output features.npy');
-	exec('curl -X POST -F file=features.npy http://localhost:3000/classify');
-	exec('rm features.npy')
-	res.json({ result: 'ready' });
-})
-
-
-router.get( '/result', ( req, res ) => {
-	console.log('get req')
-	res.json({ result: tmp });
-})
+// /**
+//  * @route GET /api/profile/execdocker
+//  * @access public
+//  */
+// router.get( '/execfeatures', ( req, res ) => {
+// 	exec('docker run aboshchenko/features-extraction:latest');
+// 	res.json({ result: 'ready' });
+// })
+//
+//
+// router.get( '/result', ( req, res ) => {
+// 	console.log('get req')
+// 	res.json({ result: tmp });
+// })
 
 
 /**
@@ -98,7 +86,7 @@ router.post( '/video-upload', ( req, res ) => {
 				res.json( 'Error: No File Selected' );
 			} else {
 				// If Success
-				tmp = ""
+				// tmp = ""
 				const videoName = 'test.mp4';
 				const videoLocation = req.file.location;
 				res.json( {
